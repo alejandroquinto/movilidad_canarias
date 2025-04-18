@@ -1,0 +1,208 @@
+/* Reset + Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body, html {
+    height: 100%;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  /* Intro Screen */
+  .intro-screen {
+    background-color: #346664;
+    color: white;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 60px;
+  }
+  .intro-content {
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px;
+    padding-left: 100px; /* <- aquí ajustas */
+    gap: 20px;
+  }
+  
+  .intro-icon {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+  }
+  .intro-content h1 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  .intro-content p {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+  }
+  #exploreBtn {
+    margin-top: 20px;
+    background-color: #ffffff;
+    color: #004E41;
+    padding: 16px 28px;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 32px;
+    cursor: pointer;
+  }
+  #exploreBtn:hover {
+    background-color: #e0e0e0;
+  }
+  
+  /* Split View */
+  .split {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+  }
+  .split-left {
+    flex: 1;
+    background-color: #346664;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+  .split-left .icon {
+    font-size: 3rem;
+  }
+  .split-left h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  .city-select {
+    padding: 14px 24px;
+    background: white;
+    color: #004E41;
+    border-radius: 30px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .city-select:hover {
+    background: #e0e0e0;
+  }
+  .split-map {
+    flex: 1;
+    height: 100%;
+  }
+  
+  /* Utility */
+  .hidden {
+    display: none;
+  }
+
+  .back-arrow {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 2rem;
+    background: none;
+    color: white;
+    border: none;
+    cursor: pointer;
+    z-index: 999;
+    transition: transform 0.2s ease;
+  }
+  
+  .back-arrow:hover {
+    transform: scale(1.2);
+  }
+
+  .city-dropdown {
+    margin-top: 20px;
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 10px;
+    border: none;
+    color: #004E41;
+    font-weight: 600;
+    width: 80%;
+    max-width: 300px;
+  }
+  
+  .municipio-info {
+    margin-top: 30px;
+    color: white;
+    max-width: 400px;
+    text-align: left;
+    font-size: 1.5rem;
+    line-height: 1.6;
+  }
+  .municipio-info strong {
+    font-weight: 700;
+    color: #fcd262;
+  }
+  
+  .mini-chart {
+    margin-top: 20px;
+    width: 100%;
+    position: relative;
+  }
+  
+  /* LEYENDA */
+  .chart-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.6rem;
+    color: white;
+    margin-bottom: 6px;
+    padding: 0 4px;
+  }
+  
+  /* BARRA MINIMAL */
+  .chart-bar {
+    width: 100%;
+    height: 10px;
+    background-color: rgba(255, 255, 255, 0.25);
+    border-radius: 5px;
+    position: relative;
+  }
+  
+  /* MARCADOR MINIMAL */
+  .chart-marker {
+    position: absolute;
+    top: -4px;
+    width: 4px;
+    height: 18px;
+    background-color: #ffd700;
+    border-radius: 1px;
+    animation: bounce-marker 0.5s ease;
+  }
+  
+  /* ANIMACIÓN */
+  @keyframes bounce-marker {
+    0% { height: 0; top: 6px; opacity: 0; }
+    50% { height: 22px; top: -7px; opacity: 1; }
+    100% { height: 18px; top: -4px; opacity: 1; }
+  }
+  
+  .info-data {
+    margin-bottom: 16px;
+  }
+  
+  .info-data p {
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.6;
+    color: white;
+  }
+  
+  .info-humor p {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-top: 20px;
+    line-height: 1.5;
+  }
+  

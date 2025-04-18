@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canarias Vehículos</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+
+  <!-- Intro Section -->
+  <section id="intro" class="intro-screen">
+    <div class="intro-content">
+      <div class="intro-icon">🚗</div>
+      <h1>Canarias tiene más de un millón<br>de vehículos en circulación.</h1>
+      <p>Pero, ¿cuántos de ellos realmente necesitamos?</p>
+      <p>¿Qué lugar ocupa tu municipio en esta rueda sin fin?</p>
+      <button id="exploreBtn">Explora los datos</button>
+    </div>
+  </section>
+
+  <!-- Split Map Section -->
+  <section id="split-view" class="split hidden">
+    <div class="split-left">
+        <button id="backBtn" class="back-arrow">←</button>
+        <div class="icon">🏘️</div>
+        <h2>¿En qué ciudad resides?</h2>
+        <button class="city-select" id="citySelectBtn">Elige tu ciudad</button>
+        <select id="cityDropdown" class="city-dropdown hidden"></select>
+        <div id="municipioInfo" class="municipio-info hidden">
+            <!-- Aquí se llenará el texto dinámicamente -->
+            <div class="mini-chart">
+                <div class="chart-labels">
+                  <span>A tope de coches</span>
+                  <span>Menos coches</span>
+                </div>
+                <div class="chart-bar">
+                  <div class="chart-marker" id="chartMarker"></div>
+                </div>
+              </div>
+          </div>                      
+      </div>
+    <div id="map" class="split-map"></div>
+  </section>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
