@@ -11,23 +11,20 @@
   
   /* Intro Screen */
   .intro-screen {
-    background-color: #346664;
-    color: white;
-    height: 100vh;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    padding: 60px;
+    justify-content: center;
+    height: 100vh;
+    padding: 20px;
+    text-align: center;
+    flex-direction: column;
   }
+  
   .intro-content {
     max-width: 500px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 60px;
-    padding-left: 100px; /* <- aquí ajustas */
-    gap: 20px;
+    width: 100%;
   }
+  
   
   .intro-icon {
     font-size: 2.5rem;
@@ -375,7 +372,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 16px;
+    gap: 10px;
     width: 100%;
   }
 
