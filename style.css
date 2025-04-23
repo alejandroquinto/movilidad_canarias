@@ -72,6 +72,8 @@
     align-items: center;
     justify-content: center;
     gap: 20px;
+    min-height: 100vh;
+    box-sizing: border-box;
   }
   .split-left .icon {
     font-size: 3rem;
@@ -205,4 +207,235 @@
     margin-top: 20px;
     line-height: 1.5;
   }
+
+  .next-button {
+    margin-top: 20px;
+    padding: 12px 24px;
+    background-color: #ffffff;
+    color: #004E41;
+    border: none;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+
+  .quiz {
+    max-width: 500px;
+    width: 100%;
+  }
   
+  
+  .quiz-question {
+    font-size: 1.2rem;
+    padding-left: 16px;
+    margin-top: 30px;
+    font-weight: 600;
+  }
+
+
+.quiz-option {
+  width: 80%;
+  height: 48px; /* fixed height */
+  padding: 0 16px;
+  font-size: 1rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 20px;
+  background: #ffffff;
+  color: #004E41;
+  cursor: pointer;
+  box-sizing: border-box;
+  gap: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease;
+  text-align: center;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  margin-bottom: 16px;
+  margin-top: 12px;
+}
+
+.quiz-option.selected {
+  background-color: #fcd262;
+  color: #003c34;
+  font-weight: 700;
+}
+
+/* Optional: hover effect */
+.quiz-option:hover {
+  background-color: #e0e0e0;
+}
+  
+  
+  .quiz-options button:active {
+    transform: scale(0.98);
+  }
+  
+  
+  .quiz-options button:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .quiz-response {
+    margin-top: 20px;
+    font-style: italic;
+  }
+  
+  .quiz-reflexiona {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    font-size: 1rem;
+  }
+  
+  .fade-in {
+    animation: fadeInUp 0.4s ease-in-out;
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .quiz-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 24px;
+    text-align: center;
+    color: white;
+  }
+  
+  .reflexiona-box {
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    padding: 24px;
+    margin-top: 30px;
+    font-size: 1rem;
+    color: #ffffff;
+    backdrop-filter: blur(4px);
+    text-align: left;
+  }
+  
+  .reflexiona-box h3 {
+    margin-top: 0;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #fcd262;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .reflexiona-icon {
+    font-size: 1.5rem;
+  }
+  
+  /* Mobile layout adjustments */
+@media (max-width: 768px) {
+  .split {
+    flex-direction: column;
+  }
+
+  .split-map {
+    display: none;
+  }
+
+  .split-left {
+    width: 100%;
+    padding: 20px;
+    min-height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .quiz,
+  #municipioInfo {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .custom-icon {
+    max-width: 60px;
+    margin-bottom: 16px;
+  }
+
+  .quiz-options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+  }
+
+  .quiz-option {
+    width: 100%;
+    max-width: 360px;
+    height: 48px;
+    font-size: 1rem;
+    font-weight: 500;
+    border: none;
+    border-radius: 20px;
+    background: #ffffff;
+    color: #004E41;
+    cursor: pointer;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease;
+    text-align: center;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .quiz-option.selected {
+    background-color: #fcd262;
+    color: #003c34;
+    font-weight: 700;
+  }
+
+  .quiz-question,
+  .quiz-response,
+  .reflexiona-box {
+    text-align: center;
+    width: 100%;
+  }
+
+  .reflexiona-box {
+    font-size: 0.95rem;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    backdrop-filter: blur(4px);
+    color: #ffffff;
+    margin-top: 30px;
+  }
+
+  .reflexiona-box h3 {
+    color: #fcd262;
+    font-weight: 700;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .reflexiona-icon {
+    font-size: 1.5rem;
+  }
+}

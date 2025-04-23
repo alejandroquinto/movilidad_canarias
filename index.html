@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Canarias Vehículos</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body>
@@ -23,24 +23,63 @@
   <!-- Split Map Section -->
   <section id="split-view" class="split hidden">
     <div class="split-left">
-        <button id="backBtn" class="back-arrow">←</button>
-        <div class="icon">🏘️</div>
-        <h2>¿En qué ciudad resides?</h2>
-        <button class="city-select" id="citySelectBtn">Elige tu ciudad</button>
-        <select id="cityDropdown" class="city-dropdown hidden"></select>
-        <div id="municipioInfo" class="municipio-info hidden">
-            <!-- Aquí se llenará el texto dinámicamente -->
-            <div class="mini-chart">
-                <div class="chart-labels">
-                  <span>A tope de coches</span>
-                  <span>Menos coches</span>
-                </div>
-                <div class="chart-bar">
-                  <div class="chart-marker" id="chartMarker"></div>
-                </div>
-              </div>
-          </div>                      
+      <button id="backBtn" class="back-arrow">←</button>
+      <div class="icon">
+  <span class="emoji-icon">🏠</span>
+</div>
+      <h2>¿En qué ciudad resides?</h2>
+      <button class="city-select" id="citySelectBtn">Elige tu ciudad</button>
+      <select id="cityDropdown" class="city-dropdown hidden"></select>
+
+      <!-- MUNICIPIO INFO -->
+      <div id="municipioInfo" class="municipio-info hidden">
+        <div class="mini-chart">
+          <div class="chart-labels">
+            <span>Más coches</span>
+            <span>Menos coches</span>
+          </div>
+          <div class="chart-bar">
+            <div class="chart-marker" id="chartMarker"></div>
+          </div>
+        </div>
       </div>
+
+      <!-- QUIZ SECTION -->
+      <div id="quizContainer" class="quiz hidden">
+        
+
+        
+        <div class="quiz-options">
+          <button class="quiz-option" data-answer="uso-diario">Sí, lo uso cada día</button>
+          <button class="quiz-option" data-answer="uso-poco">Sí, pero lo uso poco</button>
+          <button class="quiz-option" data-answer="no-tengo">No tengo coche</button>
+        </div>
+
+        <div class="quiz-response" id="quizResponse"></div>
+
+        <div class="quiz-subquestion hidden">
+          <div class="quiz-question">¿Cuántos coches hay en tu casa?</div>
+          <div class="quiz-options">
+            <button class="quiz-option" data-answer="ninguno">Ninguno</button>
+            <button class="quiz-option" data-answer="uno">1 coche</button>
+            <button class="quiz-option" data-answer="dos-mas">2 o más</button>
+          </div>
+        </div>
+
+        <div class="quiz-response" id="quizResponse2"></div>
+
+        <div id="reflexiona" class="quiz-reflexiona hidden">
+          <div class="reflexiona-box">
+            <h3><span class="reflexiona-icon">💡</span> Reflexiona:</h3>
+            <p>Canarias tiene 821 vehículos por cada 1.000 habitantes.  
+            Si Canarias fuera un país, ¡sería el 6º con más vehículos por habitante!</p>
+            <p><em>Fuente</em></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAP -->
     <div id="map" class="split-map"></div>
   </section>
 

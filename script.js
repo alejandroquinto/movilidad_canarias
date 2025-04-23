@@ -1,3 +1,5 @@
+// script.js
+
 document.addEventListener('DOMContentLoaded', () => {
   let mapInitialized = false;
   let map, geojsonLayer;
@@ -39,19 +41,19 @@ document.addEventListener('DOMContentLoaded', () => {
             const chunkSize = Math.floor(sorted.length / 5);
 
             sorted.forEach((m, i) => {
-                if (i < chunkSize) {
-                  m.rank = "🚗🚗🚗 ¡Vuestro municipio vive sobre ruedas! (20% más motorizado)";
-                } else if (i < chunkSize * 2) {
-                  m.rank = "🚗🚗 Bastante motorizado... el coche es vuestro mejor amigo (40% más motorizado)";
-                } else if (i < chunkSize * 3) {
-                  m.rank = "🚲 En la media, ni tanto ni tan poco. Un equilibrio digno.";
-                } else if (i < chunkSize * 4) {
-                  m.rank = "🦶🚶 Poco motorizado... parece que os gusta andar o compartir coche (40% menos motorizado)";
-                } else {
-                  m.rank = "🧘🚶‍♀️ ¡Zen total! ¿Vivís en bici o a lomos de una cabra? (20% menos motorizado)";
-                }
-              });
-              
+              if (i < chunkSize) {
+                m.rank = "🚗🚗🚗 ¡Vuestro municipio vive sobre ruedas! (20% más motorizado)";
+              } else if (i < chunkSize * 2) {
+                m.rank = "🚗🚗 Bastante motorizado... el coche es vuestro mejor amigo (40% más motorizado)";
+              } else if (i < chunkSize * 3) {
+                m.rank = "🚲 En la media, ni tanto ni tan poco. Un equilibrio digno.";
+              } else if (i < chunkSize * 4) {
+                m.rank = "🦶🚶 Poco motorizado... parece que os gusta andar o compartir coche (40% menos motorizado)";
+              } else {
+                m.rank = "🧘🚶‍♀️ ¡Zen total! ¿Vivís en bici o a lomos de una cabra? (20% menos motorizado)";
+              }
+            });
+
             municipioData = sorted;
 
             geojsonLayer = L.geoJSON(data, {
@@ -68,7 +70,6 @@ document.addEventListener('DOMContentLoaded', () => {
               }
             }).addTo(map);
 
-            // Poblar selector
             const etiquetas = municipioData.map(m => m.name).sort();
             etiquetas.forEach(name => {
               const option = document.createElement("option");
@@ -77,7 +78,6 @@ document.addEventListener('DOMContentLoaded', () => {
               cityDropdown.appendChild(option);
             });
 
-            // Evento: selección de municipio
             cityDropdown.addEventListener("change", () => {
               const selected = cityDropdown.value;
               const municipio = municipioData.find(m => m.name === selected);
@@ -89,7 +89,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
               });
 
-              // Mostrar texto y mini gráfico
               infoBox.innerHTML = `
               <div class="info-data">
                 <p>
@@ -110,14 +109,25 @@ document.addEventListener('DOMContentLoaded', () => {
                   <div class="chart-marker" id="chartMarker"></div>
                 </div>
               </div>
-            `;                    
+              `;
               infoBox.classList.remove("hidden");
 
-              // Mover marcador en la mini gráfica
               const index = sorted.findIndex(m => m.name === municipio.name);
               const percentage = index / (sorted.length - 1);
               const marker = document.getElementById("chartMarker");
               marker.style.left = `${percentage * 100}%`;
+
+              // Añadir botón siguiente
+              if (!document.getElementById("nextBtn")) {
+                const nextBtn = document.createElement("button");
+                nextBtn.textContent = "Siguiente →";
+                nextBtn.id = "nextBtn";
+                nextBtn.classList.add("next-button");
+                infoBox.appendChild(nextBtn);
+              }
+
+              currentMunicipio = municipio.name;
+              currentVehiculos = municipio.vehiculos;
             });
           });
 
@@ -129,9 +139,85 @@ document.addEventListener('DOMContentLoaded', () => {
   backBtn.addEventListener("click", () => {
     document.getElementById("split-view").classList.add("hidden");
     document.getElementById("intro").classList.remove("hidden");
+    document.getElementById("municipioInfo").classList.add("hidden");
   });
 
   citySelectBtn.addEventListener("click", () => {
+    citySelectBtn.classList.add("hidden");
     cityDropdown.classList.remove("hidden");
+    infoBox.classList.add("hidden");
+  });;
+
+  // ========== QUIZ LOGIC ========== //
+
+  const quizContainer = document.getElementById("quizContainer");
+  const quizResponse1 = document.getElementById("quizResponse");
+  const quizResponse2 = document.getElementById("quizResponse2");
+  const reflexionaBlock = document.getElementById("reflexiona");
+
+  document.addEventListener("click", function (e) {
+    if (e.target && e.target.id === "nextBtn") {
+      document.getElementById("municipioInfo").classList.add("hidden");
+      document.getElementById("cityDropdown").classList.add("hidden");
+      quizContainer.classList.remove("hidden");
+      document.querySelector(".icon")?.classList.add("hidden");
+      document.querySelector(".split-left h2")?.classList.add("hidden");
+      reflexionaBlock.classList.add("hidden");
+      quizResponse.innerHTML = "";
+    }
   });
+
+  const quizOptions = document.querySelectorAll("#quizContainer .quiz-options button");
+
+  quizOptions.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const group = btn.closest('.quiz-options');
+      group.querySelectorAll('button').forEach(b => b.classList.remove("selected"));
+      btn.classList.add("selected");
+      const answer = btn.dataset.answer;
+
+      let response = "";
+
+      switch (answer) {
+        case "uso-diario":
+          response = `🚘 ¡Conductor experto! En <strong>${currentMunicipio}</strong>, hay <strong>${format(currentVehiculos)}</strong> coches por cada 1.000 habitantes. Estás en buena compañía... ¿o no?`;
+          break;
+        case "uso-poco":
+          response = `💤 Tu coche se echa más siestas que tú. ¿Sabías que en <strong>${currentMunicipio}</strong> hay <strong>${format(currentVehiculos)}</strong> coches por km²?`;
+          break;
+        case "no-tengo":
+          const total = municipioData.length;
+          const menores = municipioData.filter(m => m.vehiculos < currentVehiculos).length;
+          const porcentaje = Math.round((menores / total) * 100);
+          response = `🚶‍♀️ Caminante no hay coche. Solo un <strong>${porcentaje}%</strong> de las personas en <strong>${currentMunicipio}</strong> están contigo. ¡Eres la excepción sobre ruedas!`;
+          break;
+        case "ninguno":
+          response = `🌱 ¡Cero emisiones en tu hogar! Eres parte de la resistencia.`;
+          reflexionaBlock.classList.remove("hidden");
+          break;
+        case "uno":
+          response = `⚖️ Estás dentro de la media. Muchos hogares canarios tienen uno, aunque el número varía por municipio.`;
+          reflexionaBlock.classList.remove("hidden");
+          break;
+        case "dos-mas":
+          response = `🏎️ Tu hogar está por encima de la media. Canarias tiene una alta dependencia del coche, y los municipios más pequeños superan los 800 vehículos por cada 1.000 habitantes.`;
+          reflexionaBlock.classList.remove("hidden");
+          break;
+      }
+
+      if (["uso-diario", "uso-poco", "no-tengo"].includes(answer)) {
+        quizResponse1.innerHTML = `<p class='fade-in'>${response}</p>`;
+        document.querySelector(".quiz-subquestion").classList.remove("hidden");
+      } else {
+        quizResponse2.innerHTML = `<p class='fade-in'>${response}</p>`;
+      }
+
+      if (["uso-diario", "uso-poco", "no-tengo"].includes(answer)) {
+        document.querySelector(".quiz-subquestion").classList.remove("hidden");
+      }
+    });
+  });
+
+  let currentMunicipio = "";
+  let currentVehiculos = 0;
 });
